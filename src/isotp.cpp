@@ -311,7 +311,7 @@ void IsoTpSocket::SetOptions(const Nan::FunctionCallbackInfo<Value> &args)
             self->m_opts->flags |= CAN_ISOTP_FORCE_TXSTMIN; // enable tx padding
             self->m_opts->frame_txtime = txFrameNs->Uint32Value();
         }
-        printf("txframens with 0x%x\n", self->m_opts->frame_txtime);
+        //printf("txframens with 0x%x\n", self->m_opts->frame_txtime);
         //printf("has txPadding %d %d\n", txPadding->IsBoolean(), txPadding->IsNumber());      
     }
 }
