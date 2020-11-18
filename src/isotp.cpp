@@ -302,6 +302,18 @@ void IsoTpSocket::SetOptions(const Nan::FunctionCallbackInfo<Value> &args)
         // printf("padding tx with 0x%x\n", self->m_opts->txpad_content);
         // printf("has txPadding %d %d\n", txPadding->IsBoolean(), txPadding->IsNumber());
     }
+    if (optionsObj->Has(String::NewFromUtf8(isolate, "txFrameNs")))
+    {
+        Local<Value> txFrameNs = optionsObj->Get(String::NewFromUtf8(isolate, "txFrameNs"));
+
+        if (txFrameNs->IsNumber())
+        {
+            self->m_opts->flags |= CAN_ISOTP_FORCE_TXSTMIN; // enable tx padding
+            self->m_opts->frame_txtime = txFrameNs->Uint32Value();
+        }
+        //printf("txframens with 0x%x\n", self->m_opts->frame_txtime);
+        //printf("has txPadding %d %d\n", txPadding->IsBoolean(), txPadding->IsNumber());      
+    }
 }
 
 void IsoTpSocket::Start(const Nan::FunctionCallbackInfo<Value> &info)
